@@ -1,13 +1,43 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>Sala de chat 4°A</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container main-container">
+    <hr>
+        <div class="chat-window">
+            <div class="app-mensajes" id="chat-mensajes">
+
+                <div *ngFor="let chat of firebaseService.chats"
+                    [ngClass]="{'text-end': firebaseService.usuario.uid == chat.uid,
+                                'text-start': firebaseService.usuario.uid != chat.uid}">
+                    <span 
+                    [ngClass]="{'badge alert-success': firebaseService.usuario.uid == chat.uid,
+                                'badge alert-danger': firebaseService.usuario.uid != chat.uid}" >
+                            <strong>{{chat.nombre}} </strong>
+ 
+                    </span>
+                    <br>
+                    <i>{{chat.fecha}}</i>
+                    <p class="h6" 
+                                style="border: 1px solid black;
+                                border-radius: 8px;
+                                background-color: #f2f2f2;
+                                padding: 5px;">
+                        {{chat.mensaje}}</p>
+                </div>
+                        
+            </div>
+    </div>
+    <input 
+    type="text" 
+    name="chat" 
+    id="input-mensaje"
+    class="form-control" 
+    placeholder="Enviar Mensaje..."
+    [(ngModel)]="mensaje" 
+    (keyup.enter)="enviarMensaje()">
+</div>
 </ion-content>

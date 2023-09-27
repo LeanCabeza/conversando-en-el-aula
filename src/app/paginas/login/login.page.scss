@@ -1,9 +1,13 @@
 ion-content {
     --background: #e8eff6;
     background-repeat: no-repeat;
-    background-size: 100px;
+    background-size: 100%;
     background-position: center;
     position: relative;
+}
+
+.card{
+  margin-top: 45px;
 }
 
 .sticky-footer {

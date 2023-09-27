@@ -1,6 +1,15 @@
 /* Estilos generales */
-.all {
+.allA {
     background: black;
+    background-size: cover; /* Ajusta el tamaño de la imagen al contenido */
+    background-position: center; /* Centra la imagen en el contenido */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    padding-bottom: 25px;
+    //color: white; /* Cambia el color del texto si es necesario para que sea legible en el fondo */
+  }
+
+  .allB {
+    background:  #86ddbc;
     background-size: cover; /* Ajusta el tamaño de la imagen al contenido */
     background-position: center; /* Centra la imagen en el contenido */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -17,7 +26,7 @@
     background-size: cover;
     margin-right: 20px;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: -4px;
     padding: 10px;
     border-radius: 20px;
     border: 2px solid white; /* Agregamos un borde blanco de 2px */
@@ -73,9 +82,9 @@
     border-radius: 8px;
     border: 2px solid whitesmoke;
     height: 45px;
-    width: 90%;
-    margin-left: 18px;
-    padding-left: 10px;
+    //width: 90%;
+    //margin-left: 18px;
+    //padding-left: 10px;
     color: white;
   }
 

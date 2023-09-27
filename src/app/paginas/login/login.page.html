@@ -3,7 +3,7 @@
   <ion-card-header>
     <div class="button-container">
       <ion-fab class="custom-fab-inicio" horizontal="start">
-        <ion-fab-button color="tertiary" (click)="CargaUsuarios(1)">
+        <ion-fab-button (click)="CargaUsuarios(1)">
           <img src="/assets/images/admin.png">
         </ion-fab-button>
       </ion-fab>
@@ -20,7 +20,7 @@
     </div>
   </ion-card-header>
   <br>
-  <ion-card class="card" color="light">
+  <ion-card class="card">
     <img class="gif" src="/assets/images/icon.png" />
     <ion-card-content>
       <form (submit)="Login()">

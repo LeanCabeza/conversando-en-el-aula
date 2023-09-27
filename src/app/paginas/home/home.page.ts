@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class HomePage implements OnInit {
   showSpinner:boolean = false;
 
 
-  constructor( public firebaseService: FirebaseService) {
+  constructor( public firebaseService: FirebaseService,public navCtrl: NavController) {
    }
 
   ngOnInit(): void {
@@ -31,6 +32,8 @@ export class HomePage implements OnInit {
   }
 
   cargarSala(sala: string){
+    this.sala = sala;
+    console.log(this.sala);
     this.firebaseService.cargarMensajes(sala)
     .subscribe( ()=>{
        setTimeout( ()=>{
@@ -38,8 +41,6 @@ export class HomePage implements OnInit {
        },20);
     });
     this.showChat = true;
-    this.sala == sala;
-
     this.showSpinner=true;
     setTimeout(() => {
       this.showSpinner=false;

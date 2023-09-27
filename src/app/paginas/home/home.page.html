@@ -1,5 +1,22 @@
 <ion-content>
 
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+      <!-- Establece el tamaño del botón -->
+      <ion-fab-button (click)="this.firebaseService.logout()" color="danger" size="large">
+        <!-- Agrega aquí el icono o texto para cerrar sesión -->
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+   </ion-fab>
+
+   <ion-fab *ngIf="this.showChat==true" vertical="top" horizontal="start" slot="fixed">
+    <!-- Establece el tamaño del botón -->
+    <ion-fab-button (click)="this.showChat= false" color="warning" size="large">
+      <!-- Agrega aquí el icono o texto para cerrar sesión -->
+      <ion-icon name="return-up-back-outline"></ion-icon>
+    </ion-fab-button>
+ </ion-fab>
+
+
 <div class="mainSelect" *ngIf="this.showChat == false">
     <div class="container">
         <div class="sala-4a-btn" (click)="this.cargarSala('chats_4a')">
@@ -11,8 +28,9 @@
     </div>
 </div>
 
-  <div *ngIf="this.showChat == true" class="all">
-    <h1>Sala de Chat</h1>
+  <div [ngClass]="{'allA': this.sala == 'chats_4a', 'allB': this.sala == 'chats_4b'}" *ngIf="this.showChat == true">
+    <h1 *ngIf="this.sala== 'chats_4a'" style="padding-left: 70px;">Chat CUARTO A</h1>
+    <h1 *ngIf="this.sala== 'chats_4b'" style="padding-left: 70px;">Chat CUARTO B</h1>
     <div class="chat-window">
       <div class="app-mensajes" id="chat-mensajes">
         <div *ngFor="let chat of firebaseService.chats"
@@ -33,14 +51,24 @@
           <p class="chat-text">{{chat.mensaje}}</p>
         </div>
       </div>
-      <ion-input label="⌛Mensaje..." 
-      labelPlacement="floating" 
-      [counter]="true" 
-      maxlength="21"
-      [(ngModel)]="mensaje"
-      (keyup.enter)="enviarMensaje()"
-      >
-    </ion-input>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input  label="⌛Mensaje..." 
+                        labelPlacement="floating" 
+                        [counter]="true" 
+                        maxlength="21"
+                        [(ngModel)]="mensaje"
+                        (keyup.enter)="enviarMensaje()"
+                        >
+                      </ion-input>
+          </ion-col>
+          <ion-col size="auto">
+            <ion-icon name="send-outline" size="large" style="color: white;height: 50px;" (click)="enviarMensaje()"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
       <br>
     </div>
   </div>

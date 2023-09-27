@@ -1,43 +1,51 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Sala de chat 4°A</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="container main-container">
-    <hr>
-        <div class="chat-window">
-            <div class="app-mensajes" id="chat-mensajes">
 
-                <div *ngFor="let chat of firebaseService.chats"
-                    [ngClass]="{'text-end': firebaseService.usuario.uid == chat.uid,
-                                'text-start': firebaseService.usuario.uid != chat.uid}">
-                    <span 
-                    [ngClass]="{'badge alert-success': firebaseService.usuario.uid == chat.uid,
-                                'badge alert-danger': firebaseService.usuario.uid != chat.uid}" >
-                            <strong>{{chat.nombre}} </strong>
- 
-                    </span>
-                    <br>
-                    <i>{{chat.fecha}}</i>
-                    <p class="h6" 
-                                style="border: 1px solid black;
-                                border-radius: 8px;
-                                background-color: #f2f2f2;
-                                padding: 5px;">
-                        {{chat.mensaje}}</p>
-                </div>
-                        
-            </div>
+<div class="mainSelect" *ngIf="this.showChat == false">
+    <div class="container">
+        <div class="sala-4a-btn" (click)="this.cargarSala('chats_4a')">
+          <img class="imagen-boton" src="/assets/images/4a.png">
+        </div>
+        <div class="sala-4b-btn" (click)="this.cargarSala('chats_4b')">
+          <img class="imagen-boton" src="/assets/images/4b.png">
+        </div>
     </div>
-    <input 
-    type="text" 
-    name="chat" 
-    id="input-mensaje"
-    class="form-control" 
-    placeholder="Enviar Mensaje..."
-    [(ngModel)]="mensaje" 
-    (keyup.enter)="enviarMensaje()">
 </div>
+
+  <div *ngIf="this.showChat == true" class="all">
+    <h1>Sala de Chat</h1>
+    <div class="chat-window">
+      <div class="app-mensajes" id="chat-mensajes">
+        <div *ngFor="let chat of firebaseService.chats"
+          [ngClass]="{
+            'text-end': firebaseService.usuario.uid == chat.uid,
+            'text-start': firebaseService.usuario.uid != chat.uid
+          }"
+          class="chat-message">
+          <span class="badge"
+            [ngClass]="{
+              'alert-success': firebaseService.usuario.uid == chat.uid,
+              'alert-danger': firebaseService.usuario.uid != chat.uid
+            }">
+            <strong *ngIf="firebaseService.usuario.uid != chat.uid">{{chat.nombre}}</strong>
+          </span>
+          <br>
+          <i>{{chat.fecha}}</i>
+          <p class="chat-text">{{chat.mensaje}}</p>
+        </div>
+      </div>
+      <ion-input label="⌛Mensaje..." 
+      labelPlacement="floating" 
+      [counter]="true" 
+      maxlength="21"
+      [(ngModel)]="mensaje"
+      (keyup.enter)="enviarMensaje()"
+      >
+    </ion-input>
+      <br>
+    </div>
+  </div>
 </ion-content>
+
+<div *ngIf="showSpinner" class="custom-spinner">
+  <img src="/assets/images/icon.png"/>
+</div>

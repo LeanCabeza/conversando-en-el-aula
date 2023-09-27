@@ -10,15 +10,12 @@ export class HomePage implements OnInit {
   mensaje:string ="";
   elemento: any;
   usuario:any = {}
+  sala = "";
+  showChat = false;
+  showSpinner:boolean = false;
+
 
   constructor( public firebaseService: FirebaseService) {
-  
-    this.firebaseService.cargarMensajes("chats_4B")
-                     .subscribe( ()=>{
-                        setTimeout( ()=>{
-                          this.elemento.scrollTop = this.elemento.scrollHeight;
-                        },20);
-                     });
    }
 
   ngOnInit(): void {
@@ -32,5 +29,22 @@ export class HomePage implements OnInit {
     this.firebaseService.agregarMensaje(this.mensaje);
     this.mensaje = "";
   }
+
+  cargarSala(sala: string){
+    this.firebaseService.cargarMensajes(sala)
+    .subscribe( ()=>{
+       setTimeout( ()=>{
+         this.elemento.scrollTop = this.elemento.scrollHeight;
+       },20);
+    });
+    this.showChat = true;
+    this.sala == sala;
+
+    this.showSpinner=true;
+    setTimeout(() => {
+      this.showSpinner=false;
+    }, 2000);
+  }
+  
 
 }

@@ -9,6 +9,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+
   @ViewChild('content', { static: false }) content: ElementRef;
   mensaje:string ="";
   elemento: any;
@@ -16,6 +17,8 @@ export class HomePage implements OnInit {
   sala = "";
   showChat = false;
   showSpinner:boolean = false;
+  audio = new Audio("/assets/sounds/pop.mp3");
+  
 
 
   constructor( public firebaseService: FirebaseService,public navCtrl: NavController) {
@@ -43,7 +46,7 @@ export class HomePage implements OnInit {
     }
     this.firebaseService.agregarMensaje(this.mensaje);
     this.mensaje = "";
-
+    this.audio.play();
     setTimeout(() => {
       this.scrollChatToBottom();
     }, 500);

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { FirebaseService } from 'src/app/services/firebase.service';
+
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  @ViewChild('content', { static: false }) content: ElementRef;
   mensaje:string ="";
   elemento: any;
   usuario:any = {}
@@ -23,27 +25,43 @@ export class HomePage implements OnInit {
     this.elemento = document.getElementById("chat-mensajes");
   }
 
-  enviarMensaje(){
-    if(this.mensaje.length === 0){
+  ngAfterViewInit(): void {
+    if (this.content) {
+      this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    }
+  }
+
+  scrollChatToBottom() {
+    if (this.content) {
+      this.content.nativeElement.scrollTop = this.content.nativeElement.scrollHeight;
+    }
+  }
+
+  enviarMensaje() {
+    if (this.mensaje.length === 0) {
       return;
     }
     this.firebaseService.agregarMensaje(this.mensaje);
     this.mensaje = "";
+
+    setTimeout(() => {
+      this.scrollChatToBottom();
+    }, 500);
   }
 
-  cargarSala(sala: string){
+  cargarSala(sala: string) {
     this.sala = sala;
     console.log(this.sala);
     this.firebaseService.cargarMensajes(sala)
-    .subscribe( ()=>{
-       setTimeout( ()=>{
-         this.elemento.scrollTop = this.elemento.scrollHeight;
-       },20);
-    });
+      .subscribe(() => {
+        setTimeout(() => {
+          this.scrollChatToBottom();
+        }, 20);
+      });
     this.showChat = true;
-    this.showSpinner=true;
+    this.showSpinner = true;
     setTimeout(() => {
-      this.showSpinner=false;
+      this.showSpinner = false;
     }, 2000);
   }
   

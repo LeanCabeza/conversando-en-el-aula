@@ -32,7 +32,7 @@
     <h1 *ngIf="this.sala== 'chats_4a'" style="padding-left: 70px;">Chat CUARTO A</h1>
     <h1 *ngIf="this.sala== 'chats_4b'" style="padding-left: 70px;">Chat CUARTO B</h1>
     <div class="chat-window">
-      <div class="app-mensajes" id="chat-mensajes">
+      <div class="app-mensajes"  #content id="chat-mensajes">
         <div *ngFor="let chat of firebaseService.chats"
           [ngClass]="{
             'text-end': firebaseService.usuario.uid == chat.uid,

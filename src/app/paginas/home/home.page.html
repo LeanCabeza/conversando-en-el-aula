@@ -48,7 +48,10 @@
           </span>
           <br>
           <i>{{chat.fecha}}</i>
-          <p class="chat-text">{{chat.mensaje}}</p>
+          <p [ngClass]="{
+            'chat-textMe': firebaseService.usuario.uid == chat.uid,
+            'chat-text': firebaseService.usuario.uid != chat.uid
+          }">{{chat.mensaje}}</p>
         </div>
       </div>
       <ion-grid>

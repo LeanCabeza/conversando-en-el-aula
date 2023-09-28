@@ -26,6 +26,12 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.elemento = document.getElementById("chat-mensajes");
+    this.firebaseService.cargarMensajes("chats_4a")
+      .subscribe(() => {
+        setTimeout(() => {
+          this.scrollChatToBottom();
+        }, 5);
+      });
   }
 
   ngAfterViewInit(): void {

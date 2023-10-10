@@ -1,24 +1,19 @@
 <ion-content [fullscreen]="true" overflow-scroll="false" class="contenedor">
 
   <ion-card-header>
-    <div class="button-container">
-      <ion-fab class="custom-fab-inicio" horizontal="start">
-        <ion-fab-button (click)="CargaUsuarios(1)">
-          <img src="/assets/images/admin.png">
-        </ion-fab-button>
-      </ion-fab>
-      <ion-fab class="custom-fab-medio" horizontal="center">
-        <ion-fab-button (click)="CargaUsuarios(2)">
-          <img src="/assets/images/worker.png" alt="">
-        </ion-fab-button>
-      </ion-fab>
-      <ion-fab class="custom-fab-final" horizontal="end">
-        <ion-fab-button (click)="CargaUsuarios(3)">
-          <img src="/assets/images/girl.png" alt="">
-        </ion-fab-button>
-      </ion-fab>
-    </div>
+    <ion-list style="border-radius: 50px;">
+      <ion-item>
+        <ion-select placeholder="Usuarios" (ionChange)="CargaUsuarios($event)">
+          <div slot="label" style="font-family: gamer;">⏳ Accesos rápidos <ion-text color="danger"></ion-text></div>
+          <ion-select-option value="1">Admin</ion-select-option>
+          <ion-select-option value="2">Usuario</ion-select-option>
+          <ion-select-option value="3">Invitado</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
   </ion-card-header>
+
+
   <br>
   <ion-card class="card">
     <img class="gif" src="/assets/images/icon.png" />
@@ -26,7 +21,7 @@
       <form (submit)="Login()">
         <ion-item class="ion-item">
           <ion-icon name="person" class="icon-login"></ion-icon>
-          <ion-input class="ionput" aria-label="Correo" [clearOnEdit]="true" type="email" [formControl]="correo"
+          <ion-input style="font-family: gamer;font-size: 35px;" class="ionput" aria-label="Correo" [clearOnEdit]="true" type="email" [formControl]="correo"
             required placeholder="Correo" errorText="Correo invalido" helperText="Ingrese un correo valido"
             full></ion-input>
         </ion-item>
@@ -44,7 +39,7 @@
         <br>
         <ion-item class="ion-item">
           <ion-icon name="key" class="icon-login"></ion-icon>
-          <ion-input class="ionput" aria-label="Contraseña" [clearOnEdit]="true" type="password" required
+          <ion-input style="font-family: gamer;font-size: 35px;" class="ionput" aria-label="Contraseña" [clearOnEdit]="true" type="password" required
             placeholder="Contraseña" [formControl]="password" [counter]="true" maxlength="8"
             errorText="Contraseña incorrecta" full></ion-input>
         </ion-item>
@@ -63,7 +58,7 @@
         </div>
         <br>
         <div>
-          <ion-button expand="block" type="submit"> Ingresar </ion-button>
+          <ion-button style="font-family: gamer; font-size: 20px;" expand="block" type="submit"> Ingresar </ion-button>
         </div>
 
       </form>

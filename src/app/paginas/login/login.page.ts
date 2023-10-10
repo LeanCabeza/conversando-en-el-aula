@@ -32,19 +32,20 @@ export class LoginPage implements OnInit {
   }
 
   CargaUsuarios(boton: any) {
+    console.log("Loggeando",boton);
     let correo;
     let password;
 
-    switch (boton) {
-      case 1:
+    switch (boton.detail.value) {
+      case "1":
         correo = "admin@admin.com";
         password = "111111";
         break;
-      case 2:
+      case "2":
         correo = "usuario@usuario.com";
         password = "333333";
         break;
-      case 3:
+      case "3":
         correo = "invitado@invitado.com";
         password = "222222";
         break;
